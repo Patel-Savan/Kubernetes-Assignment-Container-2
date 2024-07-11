@@ -10,3 +10,6 @@ steps:
   - --image=us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-2:latest
   - --location=us-central1-a
   - --cluster=kubernetes-assignment-cluster
+
+options:
+  logging: CLOUD_LOGGING_ONLY
