@@ -3,13 +3,23 @@ steps:
   args: ['build', '-t', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-2', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-2:latest']
-- name: "gcr.io/cloud-builders/gke-deploy"
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
   args:
-  - run
-  - --filename=kubernetes/deployment.yaml
-  - --image=us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-2:latest
-  - --location=us-central1-a
-  - --cluster=kubernetes-assignment-cluster
+  - 'container'
+  - 'clusters'
+  - 'get-credentials'
+  - 'kubernetes-assignment-cluster'
+  - '--zone'
+  - 'us-central1-a'
+  - '--project'
+  - 'kubernetest-assignment'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'kubectl'
+  args:
+  - 'apply'
+  - '-f'
+  - 'kubernetes/deployment.yaml'
 
 options:
   logging: CLOUD_LOGGING_ONLY
