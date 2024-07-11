@@ -15,7 +15,7 @@ app.post("/result",(req,res)=>{
     const fileName = body.file;
     const productName = body.product;
 
-    const filePath = "/data/" +  fileName;
+    const filePath = "../Savan_PV_dir/" +  fileName;
     var sum = 0;
     var row = 0;
     var isCsvValid = true;
