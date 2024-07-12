@@ -37,7 +37,6 @@ app.post("/result",(req,res)=>{
                     sum += amount;
                 } else {
                     isCsvValid = false;
-                    console.log("Data in not a number")
                     parser.destroy(new Error("Input file not in CSV format."));
                 }
             }
